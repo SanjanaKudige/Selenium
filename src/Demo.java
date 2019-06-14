@@ -71,8 +71,8 @@ public class Demo {
 	public static void workingWithTwitter() {
 
 		driver.get("https://twitter.com/");
-		driver.findElement(By.name("session[username_or_email]")).sendKeys("sanjana.kudigeanishkumar@gmail.com");
-		driver.findElement(By.name("session[password]")).sendKeys("Welcome998662");
+		driver.findElement(By.name("session[username_or_email]")).sendKeys("email");
+		driver.findElement(By.name("session[password]")).sendKeys("password");
 		// *[@id="doc"]/div/div[1]/div[1]/div[1]/form/input[1]
 		driver.findElement(By.xpath("//*[@id=\"doc\"]/div/div[1]/div[1]/div[1]/form/input[1]")).click();
 		// List<WebElement> we;
