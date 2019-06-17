@@ -1,7 +1,11 @@
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -35,6 +39,35 @@ public class Demo {
 	@AfterClass
 	public void cleanUpEnvironment() {
 		driver.quit();
+	}
+
+	@Test
+	public static void limitedScopeOfPage() throws InterruptedException {
+
+		driver.get("https://qaclickacademy.com/practice.php#");
+
+		// driver.findElements(By.tagName("a")).size();
+
+		WebElement footerDriver = driver.findElement(By.id("gf-BIG"));
+		System.out.println(footerDriver.findElements(By.tagName("a")).size());
+
+		WebElement columnDriver = footerDriver.findElement(By.xpath("//table/tbody/tr/td[1]/ul"));
+		System.out.println(columnDriver.findElements(By.tagName("a")).size());
+
+		for (int i = 1; i < columnDriver.findElements(By.tagName("a")).size(); i++) {
+			String clickingControl = Keys.chord(Keys.COMMAND, Keys.ENTER);
+			columnDriver.findElements(By.tagName("a")).get(i).sendKeys(clickingControl);
+
+			Thread.sleep(5000L);
+
+		}
+		Set<String> str = driver.getWindowHandles();
+		Iterator<String> itr = str.iterator();
+		
+		while (itr.hasNext()) {
+			driver.switchTo().window(itr.next());
+			System.out.println(driver.getTitle());
+		}
 	}
 
 	@Test
